@@ -194,6 +194,7 @@ for URL in $URLS; do
       ttfbs+=($(echo $request | grep -oE "TTFB: .{0,7}" | cut -d' ' -f2 | sort -n));
       if [ $VERBOSE -eq 1 ]; then
         echo "$request" >&2
+        ray=$(cat "${LOG_DIRECTORY}/${LOG}_${i}" | grep -i cf-ray || true) && echo "$request" "$ray" >&2
       else
         printf "." >&2
       fi
